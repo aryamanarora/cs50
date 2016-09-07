@@ -1,6 +1,6 @@
 # CS50
 
-These are my programming examples for CS50, a programming course offered by Harvard.
+These are my programming examples for CS50x, a computer science course offered by Harvard University.
 
 ## Week 1
 * **hello.c** - simple "hello, world" program
