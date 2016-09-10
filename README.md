@@ -8,6 +8,7 @@ These are my programming examples for CS50x, a computer science course offered b
 * **loop.c** - prints numbers 1 - 49
 * **water.c** - finds bottles of water used in *x* minutes in the shower
 * **mario.c** - makes pyramids
+* **greedy.c** - greedy algorithm
 
 ### HowStuffWorks
 * **add.c** - adds 5 and 7
