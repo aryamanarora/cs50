@@ -15,3 +15,7 @@ These are my programming examples for CS50x, a computer science course offered b
 * **add2.c** - adds two user-inputted values
 * **samp.c** - outputs "This is ouptut from my first program!"
 * **temptable.c** - handy Fahrenheit to Celsius conversion table
+
+## Week 2
+* **initials.c** - finds initials for a name
+* **caesar.c** - Caesar cipher encoder
