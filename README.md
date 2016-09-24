@@ -21,3 +21,4 @@ These are my programming examples for the **C language**, one of the older and e
 ### Week 2
 * **initials.c** - finds initials for a name
 * **caesar.c** - Caesar cipher encoder
+* **vigenere.c** - Vignere cipher encoder
