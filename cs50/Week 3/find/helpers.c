@@ -20,20 +20,19 @@ bool search(int value, int values[], int n)
     {
         return false;
     }
-    else if (n >= 1)
+
+    for (int i = 0; i < n; i++)
     {
-        for (int i = 0, i < n, i++)
+        if (values[i] == value)
         {
-            if (values[i] = value)
-            {
-                return true;
-            }
-            else if (i == n - 1 && values[i] != value)
-            {
-                return false;
-            }
+            return true;
+        }
+        else if (i == n - 1 && values[i] != value)
+        {
+            return false;
         }
     }
+    return false;
 }
 
 /**
