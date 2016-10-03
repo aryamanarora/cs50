@@ -8,6 +8,7 @@
  */
 
 #include <cs50.h>
+#include <stdio.h>
 
 #include "helpers.h"
 
@@ -16,11 +17,13 @@
  */
 bool search(int value, int values[], int n)
 {
+    // if the array is of negative size, return false
     if (n < 1)
     {
         return false;
     }
 
+    // search linearly; examine each value for number
     for (int i = 0; i < n; i++)
     {
         if (values[i] == value)
@@ -40,6 +43,18 @@ bool search(int value, int values[], int n)
  */
 void sort(int values[], int n)
 {
-    // TODO: implement an O(n^2) sorting algorithm
-    return;
+    int storage;
+    for (int j = 0; j < n; j++)
+    {
+        for (int i = 0; i < n; i++)
+        {
+
+            if (values[i] > values[i + 1] && i + 1 < n)
+            {
+                storage = values[i];
+                values[i] = values[i + 1];
+                values[i + 1] = storage;
+            }
+        }
+    }
 }
