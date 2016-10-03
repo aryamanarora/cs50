@@ -26,10 +26,12 @@ bool search(int value, int values[], int n)
     // search linearly; examine each value for number
     for (int i = 0; i < n; i++)
     {
+        // if the value is found, return true
         if (values[i] == value)
         {
             return true;
         }
+        // if the last value is not the needle, return false
         else if (i == n - 1 && values[i] != value)
         {
             return false;
@@ -43,7 +45,10 @@ bool search(int value, int values[], int n)
  */
 void sort(int values[], int n)
 {
+    // initialize storage variable
     int storage;
+    // This loop compares all the variables with the next variable (n - 1 comparisions)
+    // n times, and sorts the array with bubble sort.
     for (int j = 0; j < n; j++)
     {
         for (int i = 0; i < n; i++)
