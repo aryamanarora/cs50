@@ -26,7 +26,7 @@ int main(int argc, string argv[])
 {
     // If the required argument "n" (number of random rumbers) is not passed,
     // or if "n" and "[s]" (seed) are not passed, then an error is returned,
-    // and the syntax is explained.
+    // and the syntax is explained to the inputter.
     if (argc != 2 && argc != 3)
     {
         printf("Usage: generate n [s]\n");
@@ -36,7 +36,7 @@ int main(int argc, string argv[])
     // converts "n" to an integer for computational purposes
     int n = atoi(argv[1]);
 
-    // If a seed is passed, then it is used to seed "srand"; other, it uses
+    // If a seed is passed, then it is used to seed "srand"; otherwise, it uses
     // a random seed.
     if (argc == 3)
     {
