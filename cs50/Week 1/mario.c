@@ -1,3 +1,7 @@
+/**
+ * Makes a Mario pyramid!
+ */
+
 #include <stdio.h>
 #include <cs50.h>
 

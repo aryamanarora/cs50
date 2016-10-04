@@ -1,4 +1,6 @@
-/*How much water do you use in the shower? Let's find out!*/
+/**
+ * How much water do you use in the shower? Let's find out!
+ */
 
 #include <stdio.h>
 #include <cs50.h>

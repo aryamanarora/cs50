@@ -1,3 +1,7 @@
+/**
+ * Implements the Caesar cipher.
+ */
+
 #include <stdio.h>
 #include <cs50.h>
 #include <stdlib.h>

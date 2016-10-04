@@ -1,3 +1,8 @@
+/**
+ * Implements greedy algorithm, to find minimum number of coins needed for a
+ * certain dollar value.
+ */
+
 #include <stdio.h>
 #include <cs50.h>
 #include <math.h>

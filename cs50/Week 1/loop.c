@@ -1,3 +1,7 @@
+/**
+ * Prints numbers 1-50.
+ */
+
 #include <stdio.h>
 #include <cs50.h>
 

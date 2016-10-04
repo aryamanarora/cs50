@@ -1,3 +1,7 @@
+/**
+ * Asks for name and greets!
+ */
+
 #include <stdio.h>
 #include <cs50.h>
 

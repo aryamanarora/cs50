@@ -1,3 +1,7 @@
+/**
+ * Finds the initials of a given name.
+ */
+
 #include <stdio.h>
 #include <cs50.h>
 #include <string.h>

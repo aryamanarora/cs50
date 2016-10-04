@@ -1,4 +1,6 @@
-/* A simple "hello, world" program*/
+/**
+ * A simple "hello, world" program
+ */
 
 #include <stdio.h>
 
