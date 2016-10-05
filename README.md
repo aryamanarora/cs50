@@ -1,6 +1,6 @@
 # C Programming
 
-These are my programming examples for the **C language**, one of the older and easier to learn languages.
+These are my programming examples for the **C language**, one of the older and easier to learn languages. All files are made by me except when noted.
 
 ## CS50
 
@@ -22,3 +22,12 @@ These are my programming examples for the **C language**, one of the older and e
 * **initials.c** - finds initials for a name
 * **caesar.c** - Caesar cipher encoder
 * **vigenere.c** - Vignere cipher encoder
+
+### Week 3
+* **find**
+  * **generate.c** - generates a random number (not made by me)
+  * **find.c** - searches for a value in an array (not made by me)
+  * **helpers.c** - implements linear search and O(n^2) sort
+  * **helpers-2.c** - implements O(log(n)) search and O(n^2) sort
+* **fifteen**
+  * **fifteen.c** - game of fifteen (parts were not made by me)
