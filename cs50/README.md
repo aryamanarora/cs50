@@ -1,4 +1,4 @@
-# C Programming
+# CS50
 
 These are my programming examples for the **C language**, one of the older and easier to learn languages. All files are made by me except when noted.
 
