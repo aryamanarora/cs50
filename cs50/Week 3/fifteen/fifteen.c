@@ -98,7 +98,7 @@ int main(int argc, string argv[])
         // check for win
         if (won())
         {
-            printf("ftw!\n");
+            printf("\033[1;4;34mYou won!\033[0m\n");
             break;
         }
 
@@ -119,7 +119,7 @@ int main(int argc, string argv[])
         // move if possible, else report illegality
         if (!move(tile))
         {
-            printf("\nIllegal move.\n");
+            printf("\n\033[1;31mIllegal move.\033[0m\n");
             usleep(500000);
         }
 
@@ -149,8 +149,18 @@ void clear(void)
 void greet(void)
 {
     clear();
-    printf("WELCOME TO GAME OF FIFTEEN\n");
-    usleep(2000000);
+    printf("\033[1;32mWELCOME TO GAME OF FIFTEEN\n");
+    usleep(1000000);
+
+    printf("\033[0;2mLoading");
+    usleep(1000000);
+
+    for (int i = 0; i < 3; i++)
+    {
+        printf(".");
+        usleep(1000000);
+    }
+    printf("\033[0m\n");
 }
 
 /**
@@ -162,7 +172,7 @@ void init(void)
     // checks each board section and changes values
     for (int i = 0, k = (d * d) - 1; i < d; i++)
     {
-        for (int j = 0; j < d && k > 2; j++, k--)
+        for (int j = 0; j < d; j++, k--)
         {
             board[i][j] = k;
         }
@@ -191,7 +201,11 @@ void draw(void)
     {
         for (int j = 0; j < d; j++)
         {
-            if (board[i][j] < 10)
+            if (board[i][j] == 0)
+            {
+                printf(" _ ");
+            }
+            else if (board[i][j] < 10)
             {
                 printf(" %i ", board[i][j]);
             }
@@ -200,7 +214,7 @@ void draw(void)
                 printf("%i ", board[i][j]);
             }
         }
-        printf ("\n");
+        printf ("\n\n");
     }
 }
 
@@ -210,7 +224,43 @@ void draw(void)
  */
 bool move(int tile)
 {
-    // TODO
+    for (int i = 0; i < d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            if (board[i][j] == tile)
+            {
+                if (board[i][j + 1] == 0 && j + 1 < d)
+                {
+                    board[i][j + 1] = board[i][j];
+                    board[i][j] = 0;
+                    return true;
+                }
+                else if (board[i + 1][j] == 0 && i + 1 < d)
+                {
+                    board[i + 1][j] = board[i][j];
+                    board[i][j] = 0;
+                    return true;
+                }
+                else if (board[i][j - 1] == 0 && j - 1 >= 0)
+                {
+                    board[i][j - 1] = board[i][j];
+                    board[i][j] = 0;
+                    return true;
+                }
+                else if (board[i - 1][j] == 0 && i - 1 >= 0)
+                {
+                    board[i - 1][j] = board[i][j];
+                    board[i][j] = 0;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+    }
     return false;
 }
 
@@ -220,6 +270,20 @@ bool move(int tile)
  */
 bool won(void)
 {
-    // TODO
-    return false;
+    int k = 1;
+
+    while (k < d * d)
+    {
+        for (int i = 0; i < d; i++)
+        {
+            for (int j = 0; j < d; j++, k++)
+            {
+                if (board[i][j] != k && board[i][j] != 0)
+                {
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
 }
