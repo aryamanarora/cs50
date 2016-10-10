@@ -9,47 +9,32 @@
 
 #include <cs50.h>
 #include <stdio.h>
-#include <math.h>
 
 #include "helpers.h"
 
 /**
- * DIVIDE-AND-CONQUER SEARCH
+ * LINEAR SEARCH
  * Returns true if value is in array of n values, else false.
  */
 bool search(int value, int values[], int n)
 {
-    if (n == 1 && values[0] == value)
+    // if the array is of negative size, return false
+    if (n < 1)
     {
-        return true;
+        return false;
     }
 
-    int midpoint = (n + (n % 2))/2;
-    int midnumber = values[midpoint];
-    int startpoint = 0;
-
-    for (int i = 0; i < log2(n) + 1; i++)
+    // search linearly; examine each value for number
+    for (int i = 0; i < n; i++)
     {
-        if (value < midnumber)
+        // if the value is found, return true
+        if (values[i] == value)
         {
-            midpoint = startpoint + ((midpoint - startpoint) - ((midpoint - startpoint) % 2))/2;
-            midnumber = values[midpoint];
-
-        }
-        else if (value > midnumber)
-        {
-            startpoint = midpoint + 1;
-            midpoint = midpoint + ((n - startpoint) + ((n - startpoint) % 2))/2;
-            midnumber = values[midpoint];
-        }
-        else if (value == midnumber)
-        {
-            printf("%i, %i, %i\n", startpoint,midpoint,midnumber);
             return true;
         }
-        else
+        // if the last value is not the needle, return false
+        else if (i == n - 1 && values[i] != value)
         {
-            printf("%i, %i, %i\n", startpoint,midpoint,midnumber);
             return false;
         }
     }
