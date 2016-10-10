@@ -160,16 +160,24 @@ void greet(void)
 void init(void)
 {
     // checks each board section and changes values
-    for (int k = 0, l = (d * d) - 1; k < d; k++)
+    for (int i = 0, k = (d * d) - 1; i < d; i++)
     {
-        for (int m = 0; m < d && l > 2; m++, l--)
+        for (int j = 0; j < d && k > 2; j++, k--)
         {
-            board[k][m] = l;
+            board[i][j] = k;
         }
     }
     // 1 and 2 are switched
-    board[d - 1][d - 3] = 1;
-    board[d - 1][d - 2] = 2;
+    if ((d * d) % 2 == 0)
+    {
+        board[d - 1][d - 3] = 1;
+        board[d - 1][d - 2] = 2;
+    }
+    else
+    {
+        board[d - 1][d - 3] = 2;
+        board[d - 1][d - 2] = 1;
+    }
 }
 
 /**
@@ -177,7 +185,23 @@ void init(void)
  */
 void draw(void)
 {
-    // TODO
+    clear();
+
+    for (int i = 0; i < d; i++)
+    {
+        for (int j = 0; j < d; j++)
+        {
+            if (board[i][j] < 10)
+            {
+                printf(" %i ", board[i][j]);
+            }
+            else
+            {
+                printf("%i ", board[i][j]);
+            }
+        }
+        printf ("\n");
+    }
 }
 
 /**
