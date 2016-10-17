@@ -1,0 +1,21 @@
+16,777,216
+
+0.  GIF files only support 256 colors. BMP and JPEG 16.8 million (2^24) colors, and generally so does PNG. PNG can support up to 2^48 (more than 280 trillion) colors, however.
+1.  GIFs support animation.
+2.  Lossless formats lose no image quality when compressed, while lossy formats do.
+3.  JPEG and GIF are lossy formats.
+4.  TODO
+5.  TODO
+6.  TODO
+7.  TODO
+8.  TODO
+9.  TODO
+10. TODO
+11. TODO
+12. TODO
+13. TODO
+14. TODO
+15. TODO
+16. TODO
+17. TODO
+18. TODO
