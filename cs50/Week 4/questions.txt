@@ -4,9 +4,9 @@
 1.  GIFs support animation.
 2.  Lossless formats lose no image quality when compressed, while lossy formats do.
 3.  JPEG and GIF are lossy formats.
-4.  TODO
-5.  TODO
-6.  TODO
+4.  The file isn't actually erased, but is made overwritable. The data can still be recovered, even when overwritten.
+5.  The best way is to destroy the hard drive or render it unreadable. The next best method is to overwrite the files with random patterns, making it unrecoverable.
+6.  
 7.  TODO
 8.  TODO
 9.  TODO
