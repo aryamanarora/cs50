@@ -67,13 +67,13 @@ int main(int argc, char* argv[])
     int padding = (4 - (bi.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;
 
     BITMAPINFOHEADER bi_new = bi;
-    bi_new.biWidth *= factor;
-    bi_new.biHeight *= factor;
-    int padding_new = (4 - (bi_new.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;;
-    bi_new.biSizeImage = ((bi_new.biWidth) * sizeof(RGBTRIPLE) + (padding_new)) * abs(bi_new.biHeight);
+    bi_new.biWidth         *= factor;
+    bi_new.biHeight        *= factor;
+    int padding_new         = (4 - (bi_new.biWidth * sizeof(RGBTRIPLE)) % 4) % 4;;
+    bi_new.biSizeImage      = ((bi_new.biWidth) * sizeof(RGBTRIPLE) + (padding_new)) * abs(bi_new.biHeight);
 
     BITMAPFILEHEADER bf_new = bf;
-    bf_new.bfSize = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + bi_new.biSize;
+    bf_new.bfSize           = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + bi_new.biSizeImage;
 
     // write outfile's BITMAPFILEHEADER
     fwrite(&bf_new, sizeof(BITMAPFILEHEADER), 1, outptr);
