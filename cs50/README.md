@@ -31,3 +31,11 @@ These are my programming examples for the **C language**, one of the older and e
   * **helpers-2.c** - implements O(log(n)) search and O(n^2) sort
 * **fifteen**
   * **fifteen.c** - game of fifteen (parts were not made by me)
+
+### Week 4
+* **bmp**
+  * **bmp.h** - Microsoft's bitmap standards, implemented in C (not made by me)
+  * **copy.c** - copies a bitmap, part by part (not made by me)
+  * **whodunit.c** - pset5 image decoder (copy.c + 2 lines)
+* **jpeg**
+  * **recover.c** - gets JPEGS from a raw image
