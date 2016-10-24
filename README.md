@@ -1,6 +1,6 @@
 # CS50
 
-These are my programming examples for the **C language**, one of the older and easier to learn languages. All files are made by me except when noted.
+These are my psets and examples for CS50x 2016. All files are made by me except when noted.
 
 ## CS50
 
