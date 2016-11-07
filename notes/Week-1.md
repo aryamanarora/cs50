@@ -1,5 +1,28 @@
 # Week 1
 
+<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
+
+- [Week 1](#week-1)
+	- [C](#c)
+		- [Functions](#functions)
+			- [hello.c](#helloc)
+		- [Loops](#loops)
+		- [Variables](#variables)
+		- [Booleans](#booleans)
+		- [Conditions](#conditions)
+	- [Writing Code](#writing-code)
+		- [Libraries](#libraries)
+		- [Compiling](#compiling)
+	- [Appendix](#appendix)
+		- [Kinds of Data](#kinds-of-data)
+		- [Format codes](#format-codes)
+		- [Escape sequences](#escape-sequences)
+		- [Functions](#functions-1)
+		- [Loops](#loops-1)
+		- [Variables](#variables-1)
+
+<!-- tocstop -->
+
 ## C
 
 Some new concepts for C:
@@ -12,55 +35,55 @@ Some new concepts for C:
 
 #### hello.c
 
-~~~~c
+```{c}
 #include <stdio.h>
 
 int main(void) // when green flag clicked
 {
 	printf("hello, world\n"); // say hello world
 }
-~~~~
+```
 
 `main` is the main part of our program; the main function. The curly braces enclose the "meat" of our function. `printf` is equivalent to the `say` block in Scratch.
 
 To run this code, you do this. The first part compiles the code, while the second part runs it.
 
-~~~~bash
+```{{bash}}
 $ make hello
 $ ./hello
 hello, world
-~~~~
+```
 
 ### Loops
 
 Forever loops in Scratch are while-loops in C. This prints "hello, world" forever.
 
 While-loops execute while a condition is true, and since we passed the boolean "true", it will execute forever.
-~~~~c
+```{c}
 while (true) // forever
 {
 	printf("hello, world\n");
 }
-~~~~
+```
 
 You can also repeat with a "counter" variable. This prints "hello, world" 10 times:
-~~~~c
+```{c}
 for (int i = 0; i < 10; i++) // repeat 10
 {
 	printf("hello, world\n");
 }
-~~~~
+```
 
 ### Variables
 
-~~~~c
+```{c}
 int counter = 0; // set counter to 0
 while (true) //forever
 {
 	printf("%i\n", counter); // say counter
 	counter++; // increment counter
 }
-~~~~
+```
 
 A variable stores a value, just like in Scratch. We say `int counter = 0` because we want to specify that it is an integer.
 
@@ -68,16 +91,16 @@ The `%i` acts as a placeholder for an integer.
 
 ### Booleans
 
-~~~~c
+```{c}
 (x < y);
 ((x < y) && (y < z));
-~~~~
+```
 
 Boolean expressions are easy too.
 
 ### Conditions
 
-~~~c
+```{c}
 if (x < y)
 {
 	printf("x is less than y\n");
@@ -90,7 +113,7 @@ else
 {
 	printf("x is equal to y\n");
 }
-~~~
+```
 
 So are conditions.
 
@@ -100,22 +123,22 @@ The actual programming will be done on CS50 IDE, a cloud based programming envir
 ### Libraries
 In our examples, `stdio.h` is a library of important functions like `printf`. We include it like this:
 
-~~~~c
+```{c}
 #include <stdio.h>
-~~~~
+```
 
 There are other libraries as well, like `cs50.h` (which include the data type `string`) and `stdlib.h` and `math.h`.
 
 ### Compiling
 When we use `make` in the terminal, we actually called something else. In our case, `clang` is what compiles C code. So,
 
-~~~~bash
+```{bash}
 clang hello.c
-~~~~
+```
 is similar to
-~~~~bash
+```{bash}
 make hello
-~~~~
+```
 except it will output to `a.out`.
 
 ## Appendix

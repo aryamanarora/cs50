@@ -1,5 +1,23 @@
 # Week 4
 
+<!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
+
+- [Week 4](#week-4)
+	- [Volkswagen](#volkswagen)
+	- [Circularity & Recursion](#circularity-recursion)
+	- [Swapping Variables](#swapping-variables)
+	- [Debugging](#debugging)
+	- [Memory](#memory)
+		- [GetString() and friends](#getstring-and-friends)
+- [Week 4, continued](#week-4-continued)
+	- [Images](#images)
+	- [Structs](#structs)
+	- [Pointers](#pointers)
+	- [Fixing Swap](#fixing-swap)
+		- [Binky](#binky)
+
+<!-- tocstop -->
+
 ## Volkswagen
 *Volkswagen* cheated emissions testing with rigged software that detected when it was being tested and reduced exhaust.
 
@@ -7,19 +25,19 @@ They used a **defeat device**, and emitted 40x the nitrogen oxide limit.
 
 What kind of software would they use? Probably something like this...
 
-````
+```
 if being tested
   turn full emissions controls on
 else
   don't
-````
+```
 
 Lesson being, you can't trust any software.
 
 ## Circularity & Recursion
 Remember the binary search pseudocode?
 
-````
+```
 pick up phone book
 open to middle of phone book
 look at name
@@ -33,11 +51,11 @@ else if "Smith" is later in book
   go to line 3
 else
   give up
-````
+```
 
 C actually has a go to function, like we have in this pseudocode. However, it can interrupt the control flow of the program. Instead, we can do this:
 
-````
+```
 pick up phone book
 open to middle of phone book
 look at name
@@ -49,7 +67,7 @@ else if "Smith" is later in book
   search for Mike in right half of book
 else
   give up
-````
+```
 
 Since the problem is halved each time, we can recursively call the function without running forever.
 
@@ -58,25 +76,25 @@ Since the problem is halved each time, we can recursively call the function with
 ## Swapping Variables
 To swap values, we need a temporary variable, `tmp`.
 
-````c
+```{c}
 void swap(int a, int b)
 {
   int tmp = a;
   a = b;
   b = tmp;
 }
-````
+```
 
 You can also use the bitwise operator `XOR` and swap 8-bit ints.
 
-````c
+```{c}
 void swap(int a, int b)
 {
   a = a ^ b;
   b = b ^ a;
   a = a ^ b;
 }
-````
+```
 
 But wait... if we use `swap` to swap two values in `main`, it just swaps its duplicates! How do we fix this? We'll see this later.
 
@@ -96,9 +114,9 @@ Some things to notice:
 ### GetString() and friends
 `GetString()` is actually just a pointer! It doesn't store the actual string, just its address in the memory of the computer.
 
-**The training wheels are off!!** (No more `cs50.h`)
+**The training wheels are off!!** (No more `{c}s50.h`)
 
-Really, `string` doesn't exist, instead we'll use `char*`.
+Really, `string` doesn't exist, instead we'll use `{c}har*`.
 
 # Week 4, continued
 
@@ -126,22 +144,22 @@ Variables often have other data associated with them. For example, a list of stu
 
 We could keep separate arrays, like this:
 
-````c
+```{c}
 string names[3];
 string dorms[3];
 int ids[3];
-````
+```
 
 This is unwieldy. This is where structs come in.
 
-````c
+```{c}
 typedef struct
 {
     string name;
     string dorm;
 }
 student;
-````
+```
 
 We define our own datatype `student`! Normally this would be stored in a header file, and then included like `#include "something.h"` (because it's in your own directory).
 
@@ -149,7 +167,7 @@ We define our own datatype `student`! Normally this would be stored in a header 
 
 Now we have this:
 
-````c
+```{c}
 #include <cs50.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -193,7 +211,7 @@ int main(void)
         free(students[i].dorm);
     }
 }
-````
+```
 
 Definitions:
 
@@ -209,7 +227,7 @@ Definitions:
 ## Pointers
 Remember the mom comparision that failed earlier? Here is the fixed version:
 
-````c
+```{c}
 #include <cs50.h>
 #include <stdio.h>
 #include <string.h>
@@ -237,7 +255,7 @@ int main(void)
         }
     }
 }
-````
+```
 
 Here's a new function: `strcmp`. It compares strings' actual values, not just the addresses.
 
@@ -245,7 +263,7 @@ Remember: if you have two pointers pointing to the same value, and if you change
 
 To avoid this, you need to duplicate the value that the pointer is pointing to.
 
-````c
+```{c}
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -272,14 +290,14 @@ int main(int argc, char *argv[])
 
     /* do other stuff... */
 }
-````
+```
 
 Here's a different way to duplicate the bytes in the loop:
 
-````c
+```{c}
 // pointer2[i] = pointer1[i];
 *(pointer2 + i) - *(pointer1 + i);
-````
+```
 
 In this case, the `*` is the dereference operator, saying **go to the actual value**.
 
@@ -288,40 +306,40 @@ The `+ i` is pointer arithmetic; it's just moving forward in the memory.
 ## Fixing Swap
 Remember how the original implementation of `swap` only changed the copies that were contained within that one function? No we can change the original values with pointers!
 
-````c
+```{c}
 void swap(int a, int b)
 {
     int tmp = a;
     a = b;
     b = tmp;
 }
-````
+```
 
 Improved:
 
-````c
+```{c}
 void swap(int* a, int* b)
 {
     int tmp = *a;
     *a = *b;
     *b = tmp;
 }
-````
+```
 
 Now, the addresses of `x` and `y` need to be passed. So, we do this:
 
-````c
+```{c}
 swap(&x, &y);
-````
+```
 
 ### Binky
 
 REMEMBER TO GIVE THE POINTER A POINTEE!
 
-````c
+```{c}
 int main(int argc, char *argv[]) {
     int* x;
     x = malloc(sizeof(int));
     *x = 42;
 }
-````
+```
