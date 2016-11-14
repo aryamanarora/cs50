@@ -7,6 +7,7 @@ abstract: More about pointers and memory, and some new data structures!
 
 # Week 5
 
+
 <!-- toc orderedList:0 depthFrom:1 depthTo:6 -->
 
 - [Week 5](#week-5)
@@ -18,8 +19,16 @@ abstract: More about pointers and memory, and some new data structures!
 - [Week 5, continued](#week-5-continued)
 	- [Searching Linked Lists](#searching-linked-lists)
 	- [Stacks](#stacks)
+	- [Queues](#queues)
+	- [Memory and Heaps](#memory-and-heaps)
+		- [Buffer Overflow](#buffer-overflow)
+	- [Linked Lists](#linked-lists)
+	- [Compression](#compression)
+		- [Hash Tables](#hash-tables)
+	- [Tries](#tries)
 
 <!-- tocstop -->
+
 
 ## Pointers, continued
 
@@ -166,7 +175,7 @@ This is amazing! Some cons though:
 Further, there are queues, which are FIFO (first in first out).
 
 # Week 5, continued
-Let's look at linked list against: what's so great about them? **They can be dynamically resized**.
+Let's look at linked lists agains: what's so great about them? **They can be dynamically resized**.
 
 ## Searching Linked Lists
 ```{c}
@@ -208,6 +217,159 @@ Stacks have two main functions: `push` and `pop`. **`push`** adds something to t
 
 **`pop`** removes the last added value ($\text{size} - 1$). Actually, we reduce size, but we don't remove anything; the computer *just forgets*.
 
-What if you go beyond `CAPACITY`? Whelp, nothing you can do.
+What if you go beyond `CAPACITY`? Whelp, nothing you can do, since you can't resize this array. Here's a better implementation:
+
+```{c}
+typedef struct
+{
+		int* numbers;
+		int size;
+}
+stack;
+```
+
+Here, we just store the address of the first number. When invoking this, however, you will need `malloc`.
+
+## Queues
+```{c}
+typedef struct
+{
+		int front;
+		int numbers[CAPACITY]
+		int size;
+}
+queue;
+```
+
+enqueue
+: add to the leftmost available bit
+
+dequeue
+: remove first value, decrement `size`, increment `front`
+
+The `%` (modulo) operator helps to implement circularity in the queue.
+
+Here's a dynamic implementation:
+
+```{c}
+typedef struct
+{
+		int front;
+		int* numbers;
+		int size;
+}
+queue;
+```
+
+## Memory and Heaps
+[](http://i.imgur.com/ryoTZfk.png)
+
+When you are calling a function, it is added to the stack; it gets a slice of its own memory.
+
+But guess what; there's more memory at the top of the memory! This is the heap. When you call `malloc` you get some memory from the heap.
+
+But isn't this dangerous? The stack and heap might clash in a computer with finite memory.
+
+### Buffer Overflow
+```{c}
+#include <string.h>
+
+void f(char* bar) // takes one string, bar
+{
+		char c[12]; // 12-byte array
+		strncpy(c, bar, strlen(bar)); // copy bar into c
+}
+
+int main (int argc, char* argv[])
+{
+		f(argv[1]); // gives f argv[1]
+}
+```
+
+This is all fine if `bar` is less than 11 chars (+ `\0`). But what if we use something longer? Well, since this is in the heap, it will overwrite `*bar` (which is below it). Furthermore, C also stores the return address of the functions called in memory. What if the attacker is smart and is able to rewrite this address and access other memory!
+
+This is a **buffer overflow attack**.
+
+## Linked Lists
+Back to the horribly inefficient $O(n)$ linked list. There is a way to achieve $O(log n)$ and even $O(1)$ efficiency though...
+
+In a traditional array, you would use binary search. This is a **tree**, and is logarithmic.
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Binary_search_tree.svg/200px-Binary_search_tree.svg.png)
+
+```{c}
+typedef struct node
+{
+		int n;
+		struct node* left;
+		struct node* right;
+}
+node;
+
+bool search(int n, node* tree)
+{
+		if (tree == NULL)
+		{
+				return false;
+		}
+		else if (n < tree->n)
+		{
+				return search(n, tree->left)
+		}
+		else if (n > tree->n)
+		{
+				return search(n, tree->right)
+		}
+		else
+		{
+				return true;
+		}
+}
+```
+
+## Compression
+Everything can be compressed, especially images and video. But what about text!!?
+
+In ASCII, each letter is 8 bits, even for the less popular letters. Why not encode popular letters as smaller values?
+
+This exists: morse code. However, this isn't efficient; it's ambiguous because you need spaces/gaps.
+
+```
+(1.0)
+/    \
+0 /      \ 1
+/        \
+(0.55)       \
+/    \        \
+0 /      \ 1      \
+/        \        \
+(0.35)       \        \
+/    \        \        \
+0 /      \ 1      \        \
+/        \        \        \
+(0.2)        \        \        \
+/   \         \        \        \
+0 /     \ 1       \        \        \
+/       \         \        \        \
+(0.1)     (0.1)     (0.15)    (0.2)    (0.45)
+B         C         D         A        E
+```
+
+### Hash Tables
+A hash table is just a table of values; look at input and categorize it.
+
+linear probing
+: one value for the hash table; linear
+
+separate chaining
+: each value in the table is a linked list!
+
+## Tries
+A trie (retrieval) is a tree. Each child is an array however.
+
+![](download.png)
+
+This is $O(1)$! The search time is proportional to length of the input. This is *the holy grail of running time*.
+
 
 [^notes]: [Official Notes](http://cdn.cs50.net/2015/fall/lectures/5/m/notes5m/notes5m.html)
