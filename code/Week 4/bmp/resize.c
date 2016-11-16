@@ -28,6 +28,13 @@ int main(int argc, char* argv[])
     char* infile = argv[2];
     char* outfile = argv[3];
 
+    // validate factor
+    if (factor < 1 || factor > 100)
+    {
+        printf("Factor should be between 1 and 100\n");
+        return 2;
+    }
+
     // open input file
     FILE* inptr = fopen(infile, "r");
     if (inptr == NULL)
