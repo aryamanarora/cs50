@@ -1,6 +1,10 @@
 # CS50
 
-These are my psets and examples for CS50x 2016. All files are made by me except when noted.
+<a href="https://github.com/open-source-society/computer-science">
+<img alt="Open Source Society University - Computer Science" src="https://img.shields.io/badge/OSSU-computer--science-blue.svg">
+</a>
+
+These are my psets and examples for **CS50x 2016**, my first foray into computer science. All files are made by me except when noted.
 
 ## CS50
 
