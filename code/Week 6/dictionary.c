@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "dictionary.h"
 
@@ -23,6 +24,22 @@ typedef struct node
     struct node* next;
 }
 node;
+
+int hasher(char word[])
+{
+    // lower case
+    char letter_to_hash = tolower(word[0]);
+
+    // time to hash!
+    int hash;
+    if (isalpha(letter_to_hash))
+        hash = (letter_to_hash - 'a') + 1;
+    else
+        hash = 0;
+
+    // gimme the hash
+    return hash;
+}
 
 /**
  * Returns true if word is in dictionary else false.
@@ -52,15 +69,9 @@ bool load(const char* dictionary)
     // each word, LENGTH + "/0"
     char current_word[LENGTH + 1];
 
-    int check = 0;
-
     // scan dictionary word by word
     while (fscanf(dict, "%s", current_word) != EOF)
     {
-        check++;
-        if (check < 2)
-            printf("%s", current_word);
-
         // make new node for word
         node* new_node = malloc(sizeof(node));
         if (new_node == NULL)
@@ -69,10 +80,8 @@ bool load(const char* dictionary)
             return false;
         }
 
-        // hash word
-        char letter_to_hash = current_word[0];
-        int hash = letter_to_hash - 'a';
-        printf("%i\n", hash);
+        // hash
+        int hash = hasher(current_word);
 
         // add word to node
         strcpy(new_node->word, current_word);
