@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 #include "dictionary.h"
 
@@ -22,14 +23,6 @@ typedef struct node
     struct node* next;
 }
 node;
-
-/**
- * My very own fancy hash function.
- */
-int hash_function(node* word)
-{
-    return ((int) word->word[0]) - 97;
-}
 
 /**
  * Returns true if word is in dictionary else false.
@@ -45,37 +38,54 @@ bool check(const char* word)
  */
 bool load(const char* dictionary)
 {
-    // node* name = malloc(sizeof(node));
-    // name->word = "word";
-
-    // open the file
-    FILE* dict = fopen(dictionary, "w");
-
-    // handle NULL files
+    // read the dictionary
+    FILE* dict = fopen(dictionary, "r");
     if (dict == NULL)
     {
+        printf("Could not open dictionary\n");
         return false;
     }
 
-    // hashtable, A-Z
-    node* hashtable[26];
+    // make the root nodes
+    node* hash_table[26];
 
-    // load file into hashtable
-    while (!feof(dict))
+    // each word, LENGTH + "/0"
+    char current_word[LENGTH + 1];
+
+    int check = 0;
+
+    // scan dictionary word by word
+    while (fscanf(dict, "%s", current_word) != EOF)
     {
-        // scan new word
-        node* new_word = malloc(sizeof(node));
-        fscanf(dict, "%s", new_word->word);
+        check++;
+        if (check < 2)
+            printf("%s", current_word);
 
-        // get hash
-        int hash = hash_function(new_word);
+        // make new node for word
+        node* new_node = malloc(sizeof(node));
+        if (new_node == NULL)
+        {
+            printf("Unable to begin loading\n");
+            return false;
+        }
 
-        // add to correct bin
-        new_word->next = hashtable[hash];
-        hashtable[hash] = new_word;
+        // hash word
+        char letter_to_hash = current_word[0];
+        int hash = letter_to_hash - 'a';
+        printf("%i\n", hash);
+
+        // add word to node
+        strcpy(new_node->word, current_word);
+
+        // move node to correct place
+        new_node->next = hash_table[hash];
+        hash_table[hash] = new_node;
     }
 
-    return false;
+    // that's all folks
+    fclose(dict);
+
+    return true;
 }
 
 /**

@@ -1,8 +1,9 @@
 ---
-title: Week 6
-author: Aryaman Arora
-date: November 15, 2016
+title: "Week 6"
+author: "Aryaman Arora"
+date: "November 15, 2016"
 output:
+  md_document: default
   tufte::tufte_html:
     highlight: pygments
 ---
