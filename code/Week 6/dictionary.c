@@ -25,7 +25,15 @@ typedef struct node
 }
 node;
 
-int hasher(char word[])
+/**
+ * global hash table
+ */
+node* hash_table[27];
+
+/**
+ * A fancy hash function.
+ */
+int hasher(const char word[])
 {
     // lower case
     char letter_to_hash = tolower(word[0]);
@@ -46,7 +54,28 @@ int hasher(char word[])
  */
 bool check(const char* word)
 {
-    // TODO
+    // get hash
+    int hash = hasher(word);
+
+    // initialize cursor
+    node* cursor = malloc(sizeof(node));
+
+    cursor = hash_table[hash];
+
+    // traverse linked list
+    while (cursor->next != NULL)
+    {
+        // compare word with current node
+        if (strcmp(cursor->word, word) == true)
+            free(cursor);
+            return true;
+
+        // next node
+        cursor = cursor->next;
+    }
+
+    // if cursor -> next == NULL
+    free(cursor);
     return false;
 }
 
@@ -63,11 +92,15 @@ bool load(const char* dictionary)
         return false;
     }
 
-    // make the root nodes
-    node* hash_table[26];
-
     // each word, LENGTH + "/0"
     char current_word[LENGTH + 1];
+
+    // set next to NULL in hash table
+    for (int i = 0; i < 27; i++)
+    {
+        hash_table[i] = malloc(sizeof(node));
+        hash_table[i]->next = NULL;
+    }
 
     // scan dictionary word by word
     while (fscanf(dict, "%s", current_word) != EOF)

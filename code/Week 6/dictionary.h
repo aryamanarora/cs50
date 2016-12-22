@@ -17,9 +17,24 @@
 #define LENGTH 45
 
 /**
+ * define node struct for a hash table
+ */
+typedef struct node
+{
+    char word[LENGTH + 1];
+    struct node* next;
+}
+node;
+
+/**
  * Returns true if word is in dictionary else false.
  */
 bool check(const char* word);
+
+/**
+ * A fancy hash function.
+ */
+int hasher(const char* word);
 
 /**
  * Loads dictionary into memory.  Returns true if successful else false.
