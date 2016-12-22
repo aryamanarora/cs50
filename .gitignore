@@ -1,2 +1,6 @@
 *.bmp
 *.jpg
+
+.Rhistory
+
+.DS_Store

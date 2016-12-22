@@ -16,24 +16,20 @@
 #include "dictionary.h"
 
 /**
- * define node struct for a hash table
- */
-typedef struct node
-{
-    char word[LENGTH + 1];
-    struct node* next;
-}
-node;
-
-/**
  * global hash table
  */
 node* hash_table[27];
 
 /**
+ * word count of dictionary
+ */
+int dict_count = 0;
+bool dict_loaded = false;
+
+/**
  * A fancy hash function.
  */
-int hasher(const char word[])
+int hasher(const char* word)
 {
     // lower case
     char letter_to_hash = tolower(word[0]);
@@ -54,20 +50,23 @@ int hasher(const char word[])
  */
 bool check(const char* word)
 {
+    // lower
+    char lower_word[LENGTH+1];
+    for (int i = 0; i < LENGTH+1; i++)
+        lower_word[i] = tolower(word[i]);
+
     // get hash
-    int hash = hasher(word);
+    int hash = hasher(lower_word);
 
     // initialize cursor
     node* cursor = malloc(sizeof(node));
-
     cursor = hash_table[hash];
 
     // traverse linked list
     while (cursor->next != NULL)
     {
         // compare word with current node
-        if (strcmp(cursor->word, word) == true)
-            free(cursor);
+        if (strcmp(cursor->word, lower_word) == 0)
             return true;
 
         // next node
@@ -102,9 +101,14 @@ bool load(const char* dictionary)
         hash_table[i]->next = NULL;
     }
 
+    dict_count = 0;
+
     // scan dictionary word by word
     while (fscanf(dict, "%s", current_word) != EOF)
     {
+        // increment word count
+        dict_count++;
+
         // make new node for word
         node* new_node = malloc(sizeof(node));
         if (new_node == NULL)
@@ -126,6 +130,7 @@ bool load(const char* dictionary)
 
     // that's all folks
     fclose(dict);
+    dict_loaded = true;
 
     return true;
 }
@@ -135,7 +140,13 @@ bool load(const char* dictionary)
  */
 unsigned int size(void)
 {
-    // TODO
+    // if the dictionary was checked, return the word count
+    if (dict_loaded == true)
+    {
+        return dict_count;
+    }
+
+    // any other case, return 0
     return 0;
 }
 
