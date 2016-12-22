@@ -68,7 +68,6 @@ bool check(const char* word)
         // compare word with current node
         if (strcmp(cursor->word, lower_word) == 0)
         {
-            free(cursor);
             return true;
         }
 
@@ -77,7 +76,6 @@ bool check(const char* word)
     }
 
     // if cursor -> next == NULL
-    free(cursor);
     return false;
 }
 
@@ -103,8 +101,6 @@ bool load(const char* dictionary)
         hash_table[i] = malloc(sizeof(node));
         hash_table[i]->next = NULL;
     }
-
-    dict_count = 0;
 
     // scan dictionary word by word
     while (fscanf(dict, "%s", current_word) != EOF)
@@ -170,6 +166,5 @@ bool unload(void)
         }
         free(cursor);
     }
-    free(hash_table);
     return true;
 }
