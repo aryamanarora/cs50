@@ -67,7 +67,10 @@ bool check(const char* word)
     {
         // compare word with current node
         if (strcmp(cursor->word, lower_word) == 0)
+        {
+            free(cursor);
             return true;
+        }
 
         // next node
         cursor = cursor->next;
@@ -155,6 +158,18 @@ unsigned int size(void)
  */
 bool unload(void)
 {
-    // TODO
-    return false;
+    for (int i = 0; i < 27; i++)
+    {
+        node* cursor = hash_table[i];
+
+        while (cursor != NULL)
+        {
+            node* tmp = cursor;
+            cursor = cursor -> next;
+            free(tmp);
+        }
+        free(cursor);
+    }
+    free(hash_table);
+    return true;
 }
