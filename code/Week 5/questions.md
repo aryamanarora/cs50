@@ -37,4 +37,4 @@
     | 50000 | 0.198 |
     | 100000 | 0.208 |
     | 200000 | 0.225 |
-10.
+10. I feel that an even faster hash function might be able to match the staff implementation....
