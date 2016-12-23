@@ -18,6 +18,7 @@
 
 8. It was pretty slow; *much, much* slower than the CS50 staff implementation.
 9. I made it about 2-3 times faster by using a hash function I found online. By increasing the number of buckets, I halved made it 5-6 times faster, because linked lists take a long time to traverse. The average staff time (average time to spell check a file) was 0.133 seconds.
+
     | `NUM_BUCKETS` | Average time (`./bench`) |
     | :------------ | :----------------------- |
     | 10 | N/A |
@@ -37,4 +38,5 @@
     | 50000 | 0.198 |
     | 100000 | 0.208 |
     | 200000 | 0.225 |
+
 10. I feel that an even faster hash function might be able to match the staff implementation....
