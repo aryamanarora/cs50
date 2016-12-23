@@ -42,7 +42,7 @@ Websites (servers) have IP addresses to. The **domain name system** assigns name
 
 You can look up an IP address for a website with `nslookup <website>`.
 
-```{bash}
+```bash
 nslookup google.com
 ```
 
@@ -53,13 +53,13 @@ A **router** is a device that moves data from point A to point B. The router can
 
 You can see the router's path to somewhere else with `traceroute <website>`. Normally this does three queries, you can use the option `-q` to set how many queries you want.
 
-```{bash}
+```bash
 traceroute -q 1 google.com
 ```
 
 To get to `google.com`, we go to Comcast's Wilmington Island server, to Savannah, to Jacksonville, to Miami, to Nota? And then we stay in Florida.
 
-```{bash}
+```bash
 traceroute -q 1 www.cnn.co.jp
 ```
 
@@ -145,7 +145,7 @@ The password can be hidden deeper in the "envelope". Furthermore, HTTPS encrypts
 ## HTML
 Woohoo! We made it!
 
-```{html}
+```html
 <!DOCTYPE html>
 
 <html>
@@ -160,7 +160,7 @@ Woohoo! We made it!
 
 HTML isn't a programming language; it's a markup language for websites.
 
-```{r, echo = FALSE, fig.align = 'center'}
+```r
 DiagrammeR::grViz("
 digraph rmarkdown {
 document -> html

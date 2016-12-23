@@ -67,4 +67,64 @@ In Cloud9:
 apache50 start .
 ```
 
-This is how you can have public websites!
+This is how you can have public websites! When you host on CS50 IDE, you get a subdomain of CS50's domain, [cs50.io](http://www.cs50.io).
+
+### Tags
+`HTML` is all about tags.
+
+| Tag        | Meaning   |
+| :--------- | :-------- |
+| `<p>`      | paragraph |
+| `<h#>`     | heading   |
+| `<ul>`     | unordered list |
+| `<ol>`     | ordered list |
+| `<li>`     | list item |
+| `<img/>`   | image     |
+| `<iframe>` | video, page |
+| `<div>`    | division |
+
+You can reference local or remote files.
+
+## CSS
+
+**CSS** (Cascading Style Sheets) are used for styling HTMl pages. They can be intermingled in one document, as in `css-0.html`.
+
+CSS is just key value pairs, like so:
+
+```
+color: red;
+background-color: green;
+```
+
+This is where `<style>` tags come in.
+
+```css
+body
+{
+  text-align: center;
+  background-color: blue;
+}
+
+#top
+{
+  color: red;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+#middle
+{
+  font-size: 24px;
+}
+
+#bottom
+{
+  color: blue;
+  font-size: 12px;
+}
+```
+
+This will go in the `<head>`. Or, we can have a separate `.css` file and use `<link>` to include it. This is better design, because it's more flexible.
+
+## Dynamic Sites
+Soon, we'll learn PHP!
