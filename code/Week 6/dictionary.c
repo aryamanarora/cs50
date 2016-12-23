@@ -15,10 +15,12 @@
 
 #include "dictionary.h"
 
+#define NUM_BUCKETS 35000
+
 /**
  * global hash table
  */
-node* hash_table[27];
+node* hash_table[NUM_BUCKETS];
 
 /**
  * word count of dictionary
@@ -29,20 +31,16 @@ bool dict_loaded = false;
 /**
  * A fancy hash function.
  */
-int hasher(const char* word)
+unsigned int hasher(const char* word)
 {
-    // lower case
-    char letter_to_hash = tolower(word[0]);
+    unsigned long hash = 5381;
 
-    // time to hash!
-    int hash;
-    if (isalpha(letter_to_hash))
-        hash = (letter_to_hash - 'a') + 1;
-    else
-        hash = 0;
+    for (const char* ptr = word; *ptr != '\0'; ptr++)
+    {
+        hash = ((hash << 5) + hash) + tolower(*ptr);
+    }
 
-    // gimme the hash
-    return hash;
+    return hash % NUM_BUCKETS;
 }
 
 /**
@@ -96,7 +94,7 @@ bool load(const char* dictionary)
     char current_word[LENGTH + 1];
 
     // set next to NULL in hash table
-    for (int i = 0; i < 27; i++)
+    for (int i = 0; i < NUM_BUCKETS; i++)
     {
         hash_table[i] = malloc(sizeof(node));
         hash_table[i]->next = NULL;
@@ -154,7 +152,7 @@ unsigned int size(void)
  */
 bool unload(void)
 {
-    for (int i = 0; i < 27; i++)
+    for (int i = 0; i < NUM_BUCKETS; i++)
     {
         node* cursor = hash_table[i];
 

@@ -34,7 +34,7 @@ bool check(const char* word);
 /**
  * A fancy hash function.
  */
-int hasher(const char* word);
+unsigned int hasher(const char* word);
 
 /**
  * Loads dictionary into memory.  Returns true if successful else false.
