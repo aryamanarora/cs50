@@ -6,6 +6,8 @@
 
 These are my psets and examples for **CS50x 2016**, my first foray into computer science. All files are made by me except when noted.
 
+My [notes](notes) are also available.
+
 ## CS50
 
 ### Week 1
@@ -50,6 +52,7 @@ These are my psets and examples for **CS50x 2016**, my first foray into computer
 
 ### Week 6
 *(technically pset5)*
+
 * `speller.c` - spell-checker skeleton made by CS50 staff
 * `dictionary.c` - backend functions that `speller.c` relies on, made by me
 * `dictionary.h` - header file for above
