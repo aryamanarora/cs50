@@ -12,7 +12,7 @@ output:
 knitr::opts_chunk$set(eval=FALSE)
 ```
 
-# Pointers, continued
+## Pointers, continued
 
 ```{marginfigure}
 An `unsigned int` only uses positive numbers (and 0).
@@ -23,7 +23,7 @@ An `unsigned int` only uses positive numbers (and 0).
 ```
 
 ```{c}
-#include <stdio.h>
+##include <stdio.h>
 
 int main(void)
 {
@@ -64,7 +64,7 @@ Even if we use, say `char x[16]`, we might need more memory. So, we, might use `
 
 This is where `realloc` comes in, and good ol' `cs50.h`. There's a lot hidden in there[^notes]. Basically, the library just adds memory iteratively as it needs it.
 
-# Memory
+## Memory
 All the code I've written so far is *buggy*. I've been getting memory but not `free()`ing it (until pset4)! This is not a big deal since all the programs that we've made have been small, but this can slow down the computer in bigger programs.
 
 How do you find memory leaks? `valgrind`!
@@ -111,7 +111,7 @@ int main(void)
 
 ![xkcd Pointers](https://imgs.xkcd.com/comics/pointers.png)
 
-# Data Structures
+## Data Structures
 Arrays are good in C for storing data, but *you can't change the size of the array* (unlike some higher-level languages).
 
 Instead, we can start making our own data structures. This is where **linked lists** come in.
@@ -152,7 +152,7 @@ This is amazing! Some cons though:
 - thrice the size (pointer (8 bytes) + `int`)
 - traverse list one by one; give up bracket `[]` notation
 
-## Stacks and Queues
+### Stacks and Queues
 
 (Trust me, you'll need this) Think about stacks of trays; this is a LIFO (last in first out) data structure.
 
@@ -162,7 +162,7 @@ Further, there are queues, which are FIFO (first in first out).
 
 Let's look at linked lists agains: what's so great about them? **They can be dynamically resized**.
 
-## Searching Linked Lists
+### Searching Linked Lists
 ```{c}
 typedef struct node
 {
@@ -188,7 +188,7 @@ bool search(int n, node* list)
 }
 ```
 
-## Stacks
+### Stacks
 ```{c}
 typedef struct
 {
@@ -215,7 +215,7 @@ stack;
 
 Here, we just store the address of the first number. When invoking this, however, you will need `malloc`.
 
-## Queues
+### Queues
 ```{c}
 typedef struct
 {
@@ -246,7 +246,7 @@ typedef struct
 queue;
 ```
 
-# Memory and Heaps
+## Memory and Heaps
 [](http://i.imgur.com/ryoTZfk.png)
 
 When you are calling a function, it is added to the stack; it gets a slice of its own memory.
@@ -255,9 +255,9 @@ But guess what; there's more memory at the top of the memory! This is the heap. 
 
 But isn't this dangerous? The stack and heap might clash in a computer with finite memory.
 
-## Buffer Overflow
+### Buffer Overflow
 ```{c}
-#include <string.h>
+##include <string.h>
 
 void f(char* bar) // takes one string, bar
 {
@@ -275,7 +275,7 @@ This is all fine if `bar` is less than 11 chars (+ `\0`). But what if we use som
 
 This is a **buffer overflow attack**.
 
-# Linked Lists
+## Linked Lists
 Back to the horribly inefficient $O(n)$ linked list. There is a way to achieve $O(log n)$ and even $O(1)$ efficiency though...
 
 In a traditional array, you would use binary search. This is a **tree**, and is logarithmic.
@@ -312,7 +312,7 @@ bool search(int n, node* tree)
 }
 ```
 
-# Compression
+## Compression
 Everything can be compressed, especially images and video. But what about text!!?
 
 In ASCII, each letter is 8 bits, even for the less popular letters. Why not encode popular letters as smaller values?
@@ -340,7 +340,7 @@ This exists: morse code. However, this isn't efficient; it's ambiguous because y
 B         C         D         A        E
 ```
 
-## Hash Tables
+### Hash Tables
 A hash table is just a table of values; look at input and categorize it.
 
 linear probing
@@ -349,10 +349,10 @@ linear probing
 separate chaining
 : each value in the table is a linked list!
 
-# Tries
+## Tries
 A trie (retrieval) is a tree. Each child is an array however.
 
-![](download.png)
+![](images/download.png)
 
 This is $O(1)$! The search time is proportional to length of the input. This is *the holy grail of running time*.
 

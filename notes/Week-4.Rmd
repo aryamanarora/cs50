@@ -11,7 +11,7 @@ output:
 knitr::opts_chunk$set(eval=FALSE)
 ```
 
-# Volkswagen
+## Volkswagen
 *Volkswagen* cheated emissions testing with rigged software that detected when it was being tested and reduced exhaust.
 
 They used a **defeat device**, and emitted 40x the nitrogen oxide limit.
@@ -27,7 +27,7 @@ else
 
 Lesson being, you can't trust any software.
 
-# Circularity & Recursion
+## Circularity & Recursion
 Remember the binary search pseudocode?
 
 ```
@@ -68,7 +68,7 @@ Since the problem is halved each time, we can recursively call the function with
 By the way, `i += j` adds j to i.
 ```
 
-# Swapping Variables
+## Swapping Variables
 To swap values, we need a temporary variable, `tmp`.
 
 ```{c}
@@ -93,7 +93,7 @@ void swap(int a, int b)
 
 But wait... if we use `swap` to swap two values in `main`, it just swaps its duplicates! How do we fix this? We'll see this later.
 
-# Debugging
+## Debugging
 ```{marginfigure}
 Remember, variables are delimited by `\\0`!
 ```
@@ -105,10 +105,10 @@ Some things to notice:
 - **breakpoints** - lines to pause at in the program
 - **call stack** - what functions are running at the moment?
 
-# Memory
+## Memory
 - **stack** - a chunk of RAM that functions have access to when called
 
-## GetString() and friends
+### GetString() and friends
 `GetString()` is actually just a pointer! It doesn't store the actual string, just its address in the memory of the computer.
 
 **The training wheels are off!!** (No more `cs50.h`)
@@ -117,7 +117,7 @@ Really, `string` doesn't exist, instead we'll use `char*`.
 
 ***
 
-# Images
+## Images
 Images are made up of *pixels*; enhancing is actually pretty much useless.
 
 An example file format is *bitmap*, wherein a series of 1's and 0's translate to an image.
@@ -136,7 +136,7 @@ For examples, JPEGS. These use *RGB values*. A JPEG's signature is always `255 2
 
 All file formats are binary under the hood.
 
-# Structs
+## Structs
 Variables often have other data associated with them. For example, a list of students may be stored with a dorm and an ID.
 
 We could keep separate arrays, like this:
@@ -158,24 +158,24 @@ typedef struct
 student;
 ```
 
-We define our own datatype `student`! Normally this would be stored in a header file, and then included like `#include "something.h"` (because it's in your own directory).
+We define our own datatype `student`! Normally this would be stored in a header file, and then included like `##include "something.h"` (because it's in your own directory).
 
 ```{marginfigure}
-A quick note: constants are defined as `#define CONSTANT VALUE`.
+A quick note: constants are defined as `##define CONSTANT VALUE`.
 ```
 
 Now we have this:
 
 ```{c}
-#include <cs50.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+##include <cs50.h>
+##include <stdio.h>
+##include <stdlib.h>
+##include <string.h>
 
-#include "structs.h"
+##include "structs.h"
 
 // number of students
-#define STUDENTS 3
+##define STUDENTS 3
 
 int main(void)
 {
@@ -223,13 +223,13 @@ Definitions:
 - `fprintf` - print to a file
 - `free` - free memory
 
-# Pointers
+## Pointers
 Remember the mom comparision that failed earlier? Here is the fixed version:
 
 ```{c}
-#include <cs50.h>
-#include <stdio.h>
-#include <string.h>
+##include <cs50.h>
+##include <stdio.h>
+##include <string.h>
 
 int main(void)
 {
@@ -263,9 +263,9 @@ Remember: if you have two pointers pointing to the same value, and if you change
 To avoid this, you need to duplicate the value that the pointer is pointing to.
 
 ```{c}
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+##include <stdio.h>
+##include <stdlib.h>
+##include <string.h>
 
 int main(int argc, char *argv[])
 {
@@ -302,7 +302,7 @@ In this case, the `*` is the dereference operator, saying **go to the actual val
 
 The `+ i` is pointer arithmetic; it's just moving forward in the memory.
 
-# Fixing Swap
+## Fixing Swap
 Remember how the original implementation of `swap` only changed the copies that were contained within that one function? No we can change the original values with pointers!
 
 ```{c}
@@ -331,7 +331,7 @@ Now, the addresses of `x` and `y` need to be passed. So, we do this:
 swap(&x, &y);
 ```
 
-## Binky
+### Binky
 
 REMEMBER TO GIVE THE POINTER A POINTEE!
 

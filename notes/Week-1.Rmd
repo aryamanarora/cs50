@@ -11,7 +11,7 @@ output:
 knitr::opts_chunk$set(eval=FALSE)
 ```
 
-# C
+## C
 
 Some new concepts for C:
 
@@ -19,12 +19,12 @@ Some new concepts for C:
 - **object code** - the code that the computer understands, in binary
 - **compiler** - software that takes source code and spits out object code
 
-## Functions
+### Functions
 
-### hello.c
+#### hello.c
 
 ```{c}
-#include <stdio.h>
+##include <stdio.h>
 
 int main(void) // when green flag clicked
 {
@@ -42,7 +42,7 @@ $ ./hello
 hello, world
 ```
 
-### Loops
+#### Loops
 
 Forever loops in Scratch are while-loops in C. This prints "hello, world" forever.
 
@@ -62,7 +62,7 @@ for (int i = 0; i < 10; i++) // repeat 10
 }
 ```
 
-### Variables
+#### Variables
 
 ```{c}
 int counter = 0; // set counter to 0
@@ -77,7 +77,7 @@ A variable stores a value, just like in Scratch. We say `int counter = 0` becaus
 
 The `%i` acts as a placeholder for an integer.
 
-### Booleans
+#### Booleans
 
 ```{c}
 (x < y);
@@ -86,7 +86,7 @@ The `%i` acts as a placeholder for an integer.
 
 Boolean expressions are easy too.
 
-### Conditions
+#### Conditions
 
 ```{c}
 if (x < y)
@@ -105,19 +105,19 @@ else
 
 So are conditions.
 
-# Writing Code
+## Writing Code
 The actual programming will be done on CS50 IDE, a cloud based programming environment. It is accessible at http://cs50.io/.
 
-## Libraries
+### Libraries
 In our examples, `stdio.h` is a library of important functions like `printf`. We include it like this:
 
 ```{c}
-#include <stdio.h>
+##include <stdio.h>
 ```
 
 There are other libraries as well, like `cs50.h` (which include the data type `string`) and `stdlib.h` and `math.h`.
 
-## Compiling
+### Compiling
 When we use `make` in the terminal, we actually called something else. In our case, `clang` is what compiles C code. So,
 
 ```{bash}
@@ -129,9 +129,9 @@ make hello
 ```
 except it will output to `a.out`.
 
-# Appendix
+## Appendix
 
-## Kinds of Data
+### Kinds of Data
 -  `string` - plain text (only in cs50.h)
 -  `char` - a single byte (character)
 -  `float` - a 32-bit number
@@ -140,7 +140,7 @@ except it will output to `a.out`.
 -  `long long` - 64 bit integer
 -  `bool` - true or false (only cs50.h)
 
-### Format codes
+#### Format codes
 - `%c`
 - `%s`
 - `%f`
@@ -148,7 +148,7 @@ except it will output to `a.out`.
 - `%lld`
 - `%s`
 
-## Escape sequences
+### Escape sequences
 To print some special characters.
 
 - `\n` - new line
@@ -156,18 +156,18 @@ To print some special characters.
 - `\r` -
 - `\"` - double quote
 
-## Functions
+### Functions
 
 - `GetChar, GetDouble, GetFloat, GetInt, GetLongLong, GetString` - prompts the user for information; these have error checking
 - `printf` - print out text for the user to see
 
-## Loops
+### Loops
 
 - `for` - for some condition, do this
 - `while` - while something is happening
 - `do ... while ...` - do something check after while something else is true
 
-## Variables
+### Variables
 
 - `int, char` etc. - initialize a variable named ...
 - `... = ...` - set a variable to something
