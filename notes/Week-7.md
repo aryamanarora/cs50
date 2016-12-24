@@ -214,3 +214,17 @@ $quote["symbol"] // "FB"
 PHP has a **ton** of functions. It's a higher-level language, far beyond C. We don't have to worry about memory management or `malloc()` and stuff.
 
 Furthermore, C is a compiled language; it has to be converted to machine code. PHP is an interpreted language, that an interpreter can understand line by line in source code form.
+
+In PHP, we give up speed for ease of creation. Meaning PHP is significantly slower. For example, `speller.php` takes 1.26 seconds to spell check the King James Bible, and `speller.c` takes 0.56 seconds.
+
+*(psst... remember CSVs? Comma-separated values? Yeah, you should.)*
+
+PHP is object-oriented; variables have methods, just like in Java and Python. We use `->` to access methods.
+
+### Super Global variables
+
+There are a few *super global variables* in PHP. These are like `$_GET` and `$_POST`, and automate accessing form data. For example, if someone has submitted their name,
+
+```php
+<?php $_POST["name"] ?>
+```
