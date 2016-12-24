@@ -4,6 +4,8 @@ author: Aryaman Arora
 title: Week 7
 ---
 
+# Week 7
+
 ## `GET` (requests)
 
 ```
@@ -128,3 +130,87 @@ This will go in the `<head>`. Or, we can have a separate `.css` file and use `<l
 
 ## Dynamic Sites
 Soon, we'll learn PHP!
+
+# Week 7, continued
+
+## PHP
+
+**PHP**! No need for main functions. Here's how you declare variables:
+
+```php
+<?php
+$var = 32;
+$var = "something";
+```
+
+PHP is loosely-typed, so no need for `int` or `char`. Here are conditions:
+
+```php
+<?php
+if (condition) {
+  // do this
+}
+else if (condition) {
+  // do this
+}
+else {
+  // do this
+}
+```
+
+It's the same! Same for booleans:
+
+```php
+<?php
+if (condition || condition && condition) {
+  // do this
+}
+```
+
+and switches:
+
+```php
+<?php
+switch (expression) {
+  case i:
+    // do this
+    break;
+}
+```
+
+and loops:
+
+```php
+<?php
+for (initialization, condition, iterator) {
+  // do this
+}
+
+while (condition) {
+  // do this
+}
+
+do {
+  // do this
+} while (condition);
+
+foreach ($numbers as $number) {
+  // do something with $number, in the array $numbers
+}
+```
+
+Here's an array, and a fancy new *associative array*!:
+
+```php
+<?php
+$numbers = [1, 2, 4, 8, 16, 32];
+$numbers[1] // 2
+
+// associative arrays!!
+$quote = ["symbol" => "FB", "price" => "79.53"];
+$quote["symbol"] // "FB"
+```
+
+PHP has a **ton** of functions. It's a higher-level language, far beyond C. We don't have to worry about memory management or `malloc()` and stuff.
+
+Furthermore, C is a compiled language; it has to be converted to machine code. PHP is an interpreted language, that an interpreter can understand line by line in source code form.
