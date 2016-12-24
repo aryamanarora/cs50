@@ -36,7 +36,7 @@ int main(void) // when green flag clicked
 
 To run this code, you do this. The first part compiles the code, while the second part runs it.
 
-```{{bash}}
+```bash
 $ make hello
 $ ./hello
 hello, world
