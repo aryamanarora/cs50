@@ -1,4 +1,9 @@
 /**
+ * loop.c
+ *
+ * Computer Science 50
+ * Problem Set 1
+ *
  * Prints numbers 1-50.
  */
 

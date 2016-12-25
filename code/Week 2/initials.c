@@ -1,4 +1,9 @@
 /**
+ * initials.c
+ *
+ * Computer Science 50
+ * Problem Set 2
+ *
  * Finds the initials of a given name.
  */
 

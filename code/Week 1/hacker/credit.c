@@ -1,3 +1,12 @@
+/**
+ * credit.c
+ *
+ * Computer Science 50
+ * Problem Set 1 Hacker Edition
+ *
+ * Finds out credit card type and validity. **DOES NOT WORK**
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>

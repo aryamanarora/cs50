@@ -1,4 +1,9 @@
 /**
+ * caesar.c
+ *
+ * Computer Science 50
+ * Problem Set 2
+ *
  * Implements the Caesar cipher.
  */
 

@@ -1,4 +1,9 @@
 /**
+ * vigenere.c
+ *
+ * Computer Science 50
+ * Problem Set 1
+ *
  * Implements the Vigenere cipher.
  */
 

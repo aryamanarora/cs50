@@ -1,4 +1,9 @@
 /**
+ * mario.c
+ *
+ * Computer Science 50
+ * Problem Set 1
+ *
  * Makes a Mario pyramid!
  */
 

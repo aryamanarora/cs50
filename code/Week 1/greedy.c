@@ -1,4 +1,9 @@
 /**
+ * greedy.c
+ *
+ * Computer Science 50
+ * Problem Set 1
+ *
  * Implements greedy algorithm, to find minimum number of coins needed for a
  * certain dollar value.
  */

@@ -1,4 +1,9 @@
 /**
+ * ask.c
+ *
+ * Computer Science 50
+ * Problem Set 1
+ *
  * Asks for name and greets!
  */
 

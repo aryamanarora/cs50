@@ -1,9 +1,9 @@
-//
-// server.c
-//
-// Computer Science 50
-// Problem Set 6
-//
+/**
+ * server.c
+ *
+ * Computer Science 50
+ * Problem Set 6
+ */
 
 // feature test macro requirements
 #define _GNU_SOURCE
@@ -71,7 +71,7 @@ bool signaled = false;
 
 int main(int argc, char* argv[])
 {
-    // a global variable defined in errno.h that's "set by system 
+    // a global variable defined in errno.h that's "set by system
     // calls and some library functions [to a nonzero value]
     // in the event of an error to indicate what went wrong"
     errno = 0;
@@ -267,7 +267,7 @@ int main(int argc, char* argv[])
 }
 
 /**
- * Checks (without blocking) whether a client has connected to server. 
+ * Checks (without blocking) whether a client has connected to server.
  * Returns true iff so.
  */
 bool connected(void)
@@ -326,7 +326,7 @@ void freedir(struct dirent** namelist, int n)
         free(namelist);
     }
 }
- 
+
 /**
  * Handles signals.
  */
@@ -623,7 +623,7 @@ const char* lookup(const char* path)
 }
 
 /**
- * Parses a request-line, storing its absolute-path at abs_path 
+ * Parses a request-line, storing its absolute-path at abs_path
  * and its query string at query, both of which are assumed
  * to be at least of length LimitRequestLine + 1.
  */
@@ -690,7 +690,7 @@ bool request(char** message, size_t* length)
     *message = NULL;
     *length = 0;
 
-    // read message 
+    // read message
     while (*length < LimitRequestLine + LimitRequestFields * LimitRequestFieldSize + 4)
     {
         // read from socket
@@ -707,7 +707,7 @@ bool request(char** message, size_t* length)
             break;
         }
 
-        // append bytes to message 
+        // append bytes to message
         *message = realloc(*message, *length + bytes + 1);
         if (*message == NULL)
         {
@@ -1005,7 +1005,7 @@ char* urldecode(const char* s)
     {
         return NULL;
     }
-    
+
     // iterate over characters in s, decoding percent-encoded octets, per
     // https://www.ietf.org/rfc/rfc3986.txt
     for (int i = 0, j = 0, n = strlen(s); i < n; i++, j++)
