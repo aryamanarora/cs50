@@ -6,6 +6,7 @@
  */
 
 // feature test macro requirements
+// gives access to certain functions
 #define _GNU_SOURCE
 #define _XOPEN_SOURCE 700
 #define _XOPEN_SOURCE_EXTENDED
@@ -60,6 +61,10 @@ void stop(void);
 void transfer(const char* path, const char* type);
 char* urldecode(const char* s);
 
+/********************
+ * GLOBAL VARIABLES *
+ ********************/
+
 // server's root
 char* root = NULL;
 
@@ -68,6 +73,10 @@ int cfd = -1, sfd = -1;
 
 // flag indicating whether control-c has been heard
 bool signaled = false;
+
+/*************
+ * FUNCTIONS *
+ *************/
 
 int main(int argc, char* argv[])
 {
@@ -273,12 +282,12 @@ int main(int argc, char* argv[])
 bool connected(void)
 {
     struct sockaddr_in cli_addr;
-    memset(&cli_addr, 0, sizeof(cli_addr));
-    socklen_t cli_len = sizeof(cli_addr);
-    cfd = accept(sfd, (struct sockaddr*) &cli_addr, &cli_len);
+    memset(&cli_addr, 0, sizeof(cli_addr)); // copies 0's into cli_addr
+    socklen_t cli_len = sizeof(cli_addr); // store sizeof cli_addr
+    cfd = accept(sfd, (struct sockaddr*) &cli_addr, &cli_len); // ¯\_(ツ)_/¯
     if (cfd == -1)
     {
-        return false;
+        return false; // hmmm...
     }
     return true;
 }
