@@ -63,3 +63,9 @@ My [notes](notes) are also available.
 * `texts/`
     * `alice.txt` - *Alice in Wonderland*
     * `example.txt` - testing file for spellchecking
+
+### Week 7
+*(pset6)*
+
+* `server.c` - implementation of a server in C, mostly made by CS50 staff
+* *public/* - some html and PHP files for a basic website
