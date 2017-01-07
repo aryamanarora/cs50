@@ -281,13 +281,13 @@ int main(int argc, char* argv[])
  */
 bool connected(void)
 {
-    struct sockaddr_in cli_addr;
+    struct sockaddr_in cli_addr; // stores client address
     memset(&cli_addr, 0, sizeof(cli_addr)); // copies 0's into cli_addr
     socklen_t cli_len = sizeof(cli_addr); // store sizeof cli_addr
-    cfd = accept(sfd, (struct sockaddr*) &cli_addr, &cli_len); // ¯\_(ツ)_/¯
+    cfd = accept(sfd, (struct sockaddr*) &cli_addr, &cli_len); // assigns an address or something? it returns -1 if it fails; cfd is a socket
     if (cfd == -1)
     {
-        return false; // hmmm...
+        return false; // not able to connect
     }
     return true;
 }
