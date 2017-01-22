@@ -1,0 +1,1 @@
+web: export API_KEY=wNIxzywKqx8fNUNZwSr7FY2ry && export API_SECRET=pLBLgyqG6I2SyZXkfT4NkFV38sZrVwKHRAaKxDYjrLWpfWDva6 && gunicorn -w 4 -b 0.0.0.0:$PORT -k gevent app:app flask run

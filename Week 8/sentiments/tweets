@@ -29,7 +29,7 @@ def main():
         # instantiate analyzer
         analyzer = Analyzer(positives, negatives)
 
-        # analyzer tweet
+        # analyze tweet
         score = analyzer.analyze(tweet)
         if score > 0.0:
             print(colored(":) {}".format(tweet), "green"))
