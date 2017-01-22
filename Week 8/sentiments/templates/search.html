@@ -6,8 +6,7 @@
 
 {% block body %}
 {{ chart | safe }}
-{% endblock %}
-
-{% block tweet %}
-"{{ tweet }}"
+<hr />
+<h2>Most Recent Tweet</h2>
+<blockquote>"{{ tweet }}"</blockquote>
 {% endblock %}
