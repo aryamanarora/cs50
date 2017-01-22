@@ -6,8 +6,6 @@
 
 These are my psets and examples for **CS50x 2016**, my first foray into computer science. All files are made by me except when noted.
 
-My [notes](notes) are also available.
-
 ## CS50
 
 ### Week 1
@@ -65,7 +63,13 @@ My [notes](notes) are also available.
     * `example.txt` - testing file for spellchecking
 
 ### Week 7
-*(pset6)*
+*(pset6, from CS50 2016, abandoned)*
 
 * `server.c` - implementation of a server in C, mostly made by CS50 staff
-* *public/* - some html and PHP files for a basic website
+* `public/` - some html and PHP files for a basic website
+
+### Week 8
+*(pset6 from CS50 2017)*
+
+* `*.py` - pset1, pset2, and pset3 implemented in Python
+* `sentiment/` - a fancy tweet analysis website written in Flask, and a CLI for sentiment analysis with `nltk`

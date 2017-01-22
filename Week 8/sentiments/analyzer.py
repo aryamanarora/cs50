@@ -18,8 +18,13 @@ class Analyzer():
     def analyze(self, text):
         """Analyze text for sentiment, returning its score."""
 
+        # just in case
+        if text is None:
+            return None
+
         # tokenize text
-        tokens = nltk.tokenize.TweetTokenizer.tokenize(text)
+        tokenizer = nltk.tokenize.TweetTokenizer()
+        tokens = tokenizer.tokenize(text)
 
         # make a list of integers, where
         # 1 is a positive word, -1 is a
