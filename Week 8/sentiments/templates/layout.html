@@ -18,6 +18,9 @@
                 </h1>
             </div>
             {% block body %}{% endblock %}
+            <hr />
+            <h2>Most Recent Tweet</h2>
+            <blockquote>{% block tweet %}{% endblock %}</blockquote>
         </div>
     </body>
 </html>

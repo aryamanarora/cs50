@@ -1,9 +1,13 @@
 {% extends "layout.html" %}
 
 {% block subtext %}
-@{{ screen_name }}
+@{{ screen_name }}, {{ tweets }} tweets analyzed
 {% endblock %}
 
 {% block body %}
 {{ chart | safe }}
+{% endblock %}
+
+{% block tweet %}
+"{{ tweet }}"
 {% endblock %}

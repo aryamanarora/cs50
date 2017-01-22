@@ -22,7 +22,7 @@ def search():
         return redirect(url_for("index"))
 
     # get screen_name's tweets
-    tweets = helpers.get_user_timeline(screen_name, 100)
+    tweets = helpers.get_user_timeline(screen_name, 200)
 
     # absolute paths to lists
     positives = os.path.join(sys.path[0], "positive-words.txt")
@@ -56,4 +56,4 @@ def search():
     chart = helpers.chart(positive, negative, neutral)
 
     # render results
-    return render_template("search.html", chart=chart, screen_name=screen_name)
+    return render_template("search.html", chart=chart, screen_name=screen_name, tweets=str(len(tweets)), tweet=tweets[0])
