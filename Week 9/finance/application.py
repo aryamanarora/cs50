@@ -4,6 +4,9 @@ from flask_session import Session
 from passlib.apps import custom_app_context as pwd_context
 from tempfile import mkdtemp
 
+import csv
+import urllib
+
 from helpers import *
 
 # configure application
@@ -39,7 +42,32 @@ def index():
 @login_required
 def buy():
     """Buy shares of stock."""
-    return apology("TODO")
+    if request.method == "POST":
+        
+        # store symbol and shares
+        symbol = request.form.get("symbol")
+        shares = float(int(request.form.get("shares")))
+        
+        # get data
+        quote = lookup(symbol)
+        if quote is None:
+            return apology("invalid stock")
+        
+        # see if user has enough money
+        rows = db.execute("SELECT * FROM users WHERE id = :id", id=session["user_id"])
+        cash = rows[0]["cash"]
+        if shares * quote["price"] > cash:
+            return apology("not enough cash")
+        
+        # buy buy buy!
+        db.execute("INSERT INTO stocks (user_id, action, symbol, shares, price) VALUES({}, '{}', {}', {}, {})".format(session["user_id"], "buy", symbol, int(shares), shares * quote["price"]))
+        db.execute("UPDATE users SET cash = {} WHERE id = {}".format(cash - (shares * quote["price"]), session["user_id"]))
+        
+        # back home
+        return redirect(url_for("index"))
+        
+    else:
+        return render_template("buy.html")
 
 @app.route("/history")
 @login_required
@@ -99,14 +127,29 @@ def logout():
 @login_required
 def quote():
     """Get stock quote."""
-    return apology("TODO")
+    
+    # if user reached route via POST (as by submitting a form via POST)
+    if request.method == "POST":
+        
+        # store symbol
+        symbol = request.form.get("symbol")
+        
+        # read data from Yahoo
+        quote = lookup(symbol)
+        
+        # render
+        if quote is not None:
+            return render_template("quoted.html", symbol=quote["symbol"], name=quote["name"], price=usd(float(quote["price"])))
+        else:
+            return apology("invalid stock")
+        
+    # else if user reached route via GET (as by clicking a link or via redirect)
+    else:
+        return render_template("quote.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user."""
-    
-    # forget any user_id
-    session.clear()
 
     # if user reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
