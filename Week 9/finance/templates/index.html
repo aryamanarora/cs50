@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block meta %}
+    <meta http-equiv="refresh" content="5">
+{% endblock %}
+
+{% block title %}
+    Overview
+{% endblock %}
+
+{% block main %}
+    <table style="width:100%" class="table table-striped">
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th> 
+            <th>Shares</th>
+            <th>Current</th>
+        </tr>
+        <tr>
+            <td>CASH</td>
+            <td></td>
+            <td></td>
+            <td>{{ cash }}</td>
+        </tr>
+    {% for stock in stocks %}
+      <tr>
+        <td>{{ stock.symbol }}</td>
+        <td>{{ stock.name }}</td>
+        <td>{{ stock.shares }}</td>
+        <td>{{ stock.value }}</td>
+      </tr>
+    {% endfor %}
+        <tr>
+            <td><b>TOTAL</b></td>
+            <td></td>
+            <td></td>
+            <td>{{ total.value }} <span style="color: {{ color }}; font-size: 11px;">({{ total.change }})</span></td>
+        </tr>
+    </table>
+{% endblock %}

@@ -36,7 +36,37 @@ db = SQL("sqlite:///finance.db")
 @app.route("/")
 @login_required
 def index():
-    return apology("TODO")
+    # get stock and cash data
+    rows = db.execute("SELECT symbol, SUM(shares), SUM(price) FROM stocks WHERE user_id = '{}' GROUP BY symbol".format(session["user_id"]))
+    cash = float(db.execute("SELECT cash FROM users WHERE id = '{}'".format(session["user_id"]))[0]['cash'])
+    
+    # add mo lookup data
+    new_rows = []
+    for row in rows:
+        data = lookup(row['symbol'])
+        row['value'] = int(row['SUM(shares)']) * data['price']
+        row['price'] = float(row['SUM(price)'])
+        row['shares'] = int(row['SUM(shares)'])
+        row['name'] = data['name']
+        new_rows.append(row)
+    
+    # totals
+    total = {}
+    total['price'] = sum(float(row['price']) for row in new_rows) + cash
+    total['value'] = sum(float(row['value']) for row in new_rows) + cash
+    total['change'] = "{0:.2f}%".format(100 * (total['value'] - total['price'])/total['price'])
+    color = "red" if (100 * (total['value'] - total['price'])/total['price'])<0 else "green"
+    total['price'], total['value'] = usd(total['price']), usd(total['value'])
+    
+    # format -_-
+    newer_new_rows = []
+    for row in new_rows:
+        row['value'] = usd(row['value'])
+        row['price'] = usd(row['price'])
+        newer_new_rows.append(row)
+    
+    # return page
+    return render_template("index.html", stocks=new_rows, cash=usd(cash), total=total, color=color)
 
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
@@ -45,7 +75,7 @@ def buy():
     if request.method == "POST":
         
         # store symbol and shares
-        symbol = request.form.get("symbol")
+        symbol = request.form.get("symbol").upper()
         shares = float(int(request.form.get("shares")))
         
         # get data
@@ -60,7 +90,7 @@ def buy():
             return apology("not enough cash")
         
         # buy buy buy!
-        db.execute("INSERT INTO stocks (user_id, action, symbol, shares, price) VALUES({}, '{}', {}', {}, {})".format(session["user_id"], "buy", symbol, int(shares), shares * quote["price"]))
+        db.execute("INSERT INTO stocks (user_id, action, symbol, shares, price) VALUES({}, '{}', '{}', {}, {})".format(session["user_id"], "buy", symbol, int(shares), shares * quote["price"]))
         db.execute("UPDATE users SET cash = {} WHERE id = {}".format(cash - (shares * quote["price"]), session["user_id"]))
         
         # back home
@@ -185,4 +215,34 @@ def register():
 @login_required
 def sell():
     """Sell shares of stock."""
+    
+    if request.method == "POST":
+        
+        # store symbol and shares
+        symbol = request.form.get("symbol").upper()
+        shares = float(int(request.form.get("shares")))
+        
+        # get data
+        quote = lookup(symbol)
+        if quote is None:
+            return apology("invalid stock")
+        
+        # see if user has enough shares
+        rows = db.execute("SELECT SUM(shares) FROM stocks WHERE user_id = :id AND symbol = :symbol", id=session["user_id"], symbol=symbol)
+        if rows[0]["SUM(shares)"] is None:
+            return apology("you don't own that stock")
+        if shares > int(rows[0]["SUM(shares)"]):
+            return apology("not enough shares")
+        cash = db.execute("SELECT cash FROM users WHERE user_id = :id", id=session["user_id"])[0]["cash"]
+        
+        # buy buy buy!
+        db.execute("INSERT INTO stocks (user_id, action, symbol, shares, price) VALUES({}, '{}', '{}', {}, {})".format(session["user_id"], "sell", symbol, 0 - int(shares), 0 - (shares * quote["price"])))
+        db.execute("UPDATE users SET cash = {} WHERE id = {}".format(cash + (shares * quote["price"]), session["user_id"]))
+        
+        # back home
+        return redirect(url_for("index"))
+        
+    else:
+        return render_template("sell.html")
+        
     return apology("TODO")
