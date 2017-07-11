@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block main %}
+    <h1 style="color: {{ color }};">{{ total.change }}</h1>
     <table style="width:100%" class="table table-striped">
         <tr>
             <th>Symbol</th>
@@ -20,21 +21,21 @@
             <td>CASH</td>
             <td></td>
             <td></td>
-            <td>{{ cash }}</td>
+            <td style="text-align: right;">{{ cash }}</td>
         </tr>
     {% for stock in stocks %}
       <tr>
         <td>{{ stock.symbol }}</td>
         <td>{{ stock.name }}</td>
-        <td>{{ stock.shares }}</td>
-        <td>{{ stock.value }}</td>
+        <td style="text-align: right;">{{ stock.shares }}</td>
+        <td style="text-align: right;">{{ stock.value }}</td>
       </tr>
     {% endfor %}
         <tr>
             <td><b>TOTAL</b></td>
             <td></td>
             <td></td>
-            <td>{{ total.value }} <span style="color: {{ color }}; font-size: 11px;">({{ total.change }})</span></td>
+            <td style="text-align: right;">{{ total.value }}</td>
         </tr>
     </table>
 {% endblock %}

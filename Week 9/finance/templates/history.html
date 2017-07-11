@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block meta %}
+    <meta http-equiv="refresh" content="5">
+{% endblock %}
+
+{% block title %}
+    Overview
+{% endblock %}
+
+{% block main %}
+    <table style="width:100%" class="table table-striped">
+        <tr>
+            <th>Symbol</th>
+            <th>Shares</th> 
+            <th>Price</th>
+            <th>Price/Share</th>
+            <th>Transacted</th>
+        </tr>
+    {% for stock in stocks %}
+      <tr>
+        <td>{{ stock.symbol }}</td>
+        <td style="text-align: right;">{{ stock.shares }}</td>
+        <td style="text-align: right;">{{ stock.price }}<br></td>
+        <td style="text-align: right;">{{ stock.pricepershare }}</td>
+        <td style="text-align: right;">{{ stock.timestamp }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+{% endblock %}

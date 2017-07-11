@@ -103,7 +103,20 @@ def buy():
 @login_required
 def history():
     """Show history of transactions."""
-    return apology("TODO")
+    
+    # get transactions
+    rows = db.execute("SELECT * FROM stocks WHERE user_id = ':id'", id=session["user_id"])
+    
+    # cleanup
+    new_rows = []
+    for row in rows:
+        row["pricepershare"] = usd(abs(row["price"])/row["shares"])
+        row["price"] = usd(abs(row["price"]))
+        new_rows.append(row)
+    rows = new_rows
+    
+    # render
+    return render_template("history.html", stocks=rows)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -233,7 +246,7 @@ def sell():
             return apology("you don't own that stock")
         if shares > int(rows[0]["SUM(shares)"]):
             return apology("not enough shares")
-        cash = db.execute("SELECT cash FROM users WHERE user_id = :id", id=session["user_id"])[0]["cash"]
+        cash = db.execute("SELECT cash FROM users WHERE id = :id", id=session["user_id"])[0]["cash"]
         
         # buy buy buy!
         db.execute("INSERT INTO stocks (user_id, action, symbol, shares, price) VALUES({}, '{}', '{}', {}, {})".format(session["user_id"], "sell", symbol, 0 - int(shares), 0 - (shares * quote["price"])))
@@ -246,3 +259,29 @@ def sell():
         return render_template("sell.html")
         
     return apology("TODO")
+
+""" my own additions """
+@app.route("/cash", methods=["GET", "POST"])
+@login_required
+def cash():
+    """ get cash """
+    
+    if request.method == "POST":
+    
+        # validate
+        cash = request.form.get("cash")
+        try:
+            cash = float(cash)
+            cash = round(cash, 2)
+        except:
+            return(apology("that's no numbah"))
+        
+        # add cash
+        current_cash = db.execute("SELECT cash FROM users WHERE id = :id", id=session["user_id"])[0]["cash"]
+        db.execute("UPDATE users SET cash = :cash WHERE id = :id", id=session["user_id"], cash=current_cash + cash)
+        
+        # back home
+        return redirect(url_for("index"))
+    
+    else:
+        return render_template("cash.html")
