@@ -35,6 +35,7 @@ def articles():
 
     geo = request.args.get("geo")
     data = lookup(geo)
+    data = data[:5]
 
     # TODO
     return jsonify([data])
