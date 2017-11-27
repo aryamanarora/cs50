@@ -75,6 +75,34 @@ function addMarker(place)
       labelAnchor: new google.maps.Point(22, 0),
       labelClass: "labels", // the CSS class for the label
     });
+    
+    var content = "";
+    
+    var parameters = {
+        geo: place["postal_code"]
+    };
+    
+    $.getJSON(Flask.url_for("articles"), parameters)
+    .done(function(data, textStatus, jqXHR) {
+        
+        console.log(data)
+        
+        for (var i = 0; i < data[0].length; i++) {
+            content += "<a href=\"" + data[0][i]["link"] + "\">";
+            content += data[0][i]["title"];
+            content += "</a><br>";
+        }
+        
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+
+        // log error to browser's console
+        console.log(errorThrown.toString());
+    });
+    
+    marker.addListener('click', function() {
+      showInfo(marker, content)
+    });
 
     markers.push(marker);
 }
@@ -143,7 +171,10 @@ function configure()
  */
 function removeMarkers()
 {
-    // TODO
+    for (i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+    }
+    markers = [];
 }
 
 /**
